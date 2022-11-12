@@ -23,6 +23,24 @@ export class ControladorReservas{
         //response.send("estoy buscando reservaidReservaes desde el controlador")
     }
 
+    async eliminarReserva(request,response){
+        let id= request.params.idReserva
+        let objetoServicioReserva=new ServicioReservas()
+        try{
+          
+          response.status(200).json({
+            "mensaje":"exito eliminando Reserva ",
+            "datos":null,
+          })  
+        } catch (error) { 
+         response.status(400).json({
+          "mensaje":"ERROR en la consulta "+error,
+          "datos":null,
+        })
+        await objetoServicioReserva.eliminarReservas(id)
+    }
+        }
+
     async buscarReservaPorId(request,response){
         //viajan por la url de la peticion
         let id=request.params.idReserva 
@@ -110,21 +128,5 @@ export class ControladorReservas{
         }
         //response.send("estoy editando desdeel controlador")
     }
-   async eliminarReserva(request,response){
-    let id= request.params.idReserva
-    let objetoServicioReserva=new ServicioReservas()
-    try{
-      
-      response.status(200).json({
-        "mensaje":"exito eliminando Reserva ",
-        "datos":null,
-      })
-      await objetoServicioReserva.eliminarReservas(id)
-    } catch (error) { 
-     response.status(400).json({
-      "mensaje":"ERROR en la consulta " +error,
-      "datos":null,
-    })
-}
-    }
+   
 }
